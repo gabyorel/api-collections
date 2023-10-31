@@ -1,0 +1,15 @@
+meta {
+  name: CreateIndex
+  type: http
+  seq: 2
+}
+
+put {
+  url: {{baseUrl}}/{{index}}
+  body: json
+  auth: none
+}
+
+vars:pre-request {
+  index: biblio_1
+}

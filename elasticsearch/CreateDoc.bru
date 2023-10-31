@@ -1,0 +1,25 @@
+meta {
+  name: CreateDoc
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/{{index}}/_doc/?pretty
+  body: json
+  auth: none
+}
+
+query {
+  pretty: 
+}
+
+body:json {
+  {
+    "ma_cle": "sa_valeur"
+  }
+}
+
+vars:pre-request {
+  index: mon_index
+}
