@@ -1,0 +1,29 @@
+meta {
+  name: DeleteBy
+  type: http
+  seq: 12
+}
+
+delete {
+  url: {{esUrl}}/{{index}}/_delete_by_query?pretty
+  body: json
+  auth: none
+}
+
+query {
+  pretty: 
+}
+
+body:json {
+  {
+    "query":{
+      "match":{
+        "key":"value"
+      }
+    }
+  }
+}
+
+vars:pre-request {
+  index: index_name
+}

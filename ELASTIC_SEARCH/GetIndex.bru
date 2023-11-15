@@ -1,0 +1,29 @@
+meta {
+  name: GetIndex
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{esUrl}}/{{index}}/_doc/_search?pretty
+  body: json
+  auth: none
+}
+
+query {
+  pretty: 
+}
+
+body:json {
+  {
+    "query":{}
+  }
+}
+
+vars:pre-request {
+  index: index_name
+}
+
+docs {
+  search a doc matching parametters in index
+}

@@ -1,0 +1,25 @@
+meta {
+  name: Analyze
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{esUrl}}/inspections/_analyze
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "tokenizer":"standard",
+    "text":"...value..."
+  }
+}
+
+docs {
+  token : 
+    - standard
+    - whitespace
+    - standard
+}

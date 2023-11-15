@@ -1,0 +1,49 @@
+meta {
+  name: DuplicateIndex
+  type: http
+  seq: 9
+}
+
+post {
+  url: {{esUrl}}/_reindex?pretty
+  body: json
+  auth: none
+}
+
+query {
+  pretty: 
+}
+
+body:json {
+  {
+    "source":{
+      "index":"value"
+    },
+    "dest":{
+      "index":"value"
+    }
+  }
+}
+
+vars:pre-request {
+  index: index_name
+}
+
+docs {
+  copy index from a remote server
+  
+  {
+    "source":{
+      "remote":{
+        "host":"",
+        "socket_timeout":"",
+        "connect_timeout":""
+      }
+    "index":"value",
+    "size": 10000
+    },
+    "dest":{
+      "index":"value"
+    }
+  }
+}

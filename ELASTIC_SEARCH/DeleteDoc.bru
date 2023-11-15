@@ -1,15 +1,16 @@
 meta {
-  name: DeleteIndex
+  name: DeleteDoc
   type: http
-  seq: 10
+  seq: 11
 }
 
 delete {
-  url: {{esUrl}}/{{index}}
+  url: {{esUrl}}/{{index}}/_doc/{{doc}}
   body: none
   auth: none
 }
 
 vars:pre-request {
   index: index_name
+  doc: doc_name
 }
