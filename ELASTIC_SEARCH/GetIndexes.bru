@@ -1,0 +1,15 @@
+meta {
+  name: GetIndexes
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{esUrl}}/_cat/indices?v
+  body: none
+  auth: none
+}
+
+query {
+  v: 
+}

@@ -1,0 +1,15 @@
+meta {
+  name: DeleteIndex
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{esUrl}}/{{index}}
+  body: none
+  auth: none
+}
+
+vars:pre-request {
+  index: index_name
+}

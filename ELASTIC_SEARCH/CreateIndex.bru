@@ -1,0 +1,15 @@
+meta {
+  name: CreateIndex
+  type: http
+  seq: 2
+}
+
+put {
+  url: {{esUrl}}/{{index}}
+  body: none
+  auth: none
+}
+
+vars:pre-request {
+  index: index_name
+}

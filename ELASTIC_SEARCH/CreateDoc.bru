@@ -1,0 +1,25 @@
+meta {
+  name: CreateDoc
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{esUrl}}/{{index}}/_doc/?pretty
+  body: json
+  auth: none
+}
+
+query {
+  pretty: 
+}
+
+body:json {
+  {
+    "key": "value"
+  }
+}
+
+vars:pre-request {
+  index: index_name
+}

@@ -1,0 +1,239 @@
+{
+  "name": "COLLECTIONS_BUILDER",
+  "version": "1",
+  "items": [
+    {
+      "type": "folder",
+      "name": "ELASTIC_SEARCH",
+      "items": [
+        {
+          "type": "http",
+          "name": "GetIndexes",
+          "seq": 1,
+          "request": {
+            "url": "{{esUrl}}/_cat/indices?v",
+            "method": "GET",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": [
+              {
+                "name": "v",
+                "value": "",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "CreateIndex",
+          "seq": 2,
+          "request": {
+            "url": "{{esUrl}}/{{index}}",
+            "method": "PUT",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {
+              "req": [
+                {
+                  "name": "index",
+                  "value": "index_name",
+                  "enabled": true,
+                  "local": false
+                }
+              ]
+            },
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "CreateDoc",
+          "seq": 3,
+          "request": {
+            "url": "{{esUrl}}/{{index}}/_doc/?pretty",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"key\": \"value\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {
+              "req": [
+                {
+                  "name": "index",
+                  "value": "index_name",
+                  "enabled": true,
+                  "local": false
+                }
+              ]
+            },
+            "assertions": [],
+            "tests": "",
+            "query": [
+              {
+                "name": "pretty",
+                "value": "",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "Search",
+          "seq": 4,
+          "request": {
+            "url": "{{esUrl}}/{{index}}/{{doc}}/_search?pretty",
+            "method": "GET",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"query\":{\n    \"bool\":{\n      \"must\":{\n        \"range\":{\n          \"Date_Log\":{\n            \"gt\":\"2021-10-19T20:00:00\",\n            \"lt\":\"2021-10-19T23:50:50\"\n          }\n        }\n      }\n    }\n  }\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {
+              "req": [
+                {
+                  "name": "index",
+                  "value": "index_name",
+                  "enabled": true,
+                  "local": false
+                },
+                {
+                  "name": "doc",
+                  "value": "doc_name",
+                  "enabled": true,
+                  "local": false
+                }
+              ]
+            },
+            "assertions": [],
+            "tests": "",
+            "query": [
+              {
+                "name": "pretty",
+                "value": "",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "DeleteIndex",
+          "seq": 5,
+          "request": {
+            "url": "{{esUrl}}/{{index}}",
+            "method": "DELETE",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {
+              "req": [
+                {
+                  "name": "index",
+                  "value": "index_name",
+                  "enabled": true,
+                  "local": false
+                }
+              ]
+            },
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        }
+      ]
+    }
+  ],
+  "activeEnvironmentUid": "geILMq3B2VVCKoRjvVzDy",
+  "environments": [
+    {
+      "variables": [
+        {
+          "name": "esUrl",
+          "value": "http://localhost:9200",
+          "enabled": true,
+          "secret": false,
+          "type": "text"
+        }
+      ],
+      "name": "local"
+    }
+  ]
+}
