@@ -1,0 +1,33 @@
+meta {
+  name: GetDocById
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{esUrl}}/{{index}}/_search?pretty
+  body: json
+  auth: none
+}
+
+query {
+  pretty: 
+}
+
+body:json {
+  {
+    "query": {
+      "bool": {
+        "filter": {
+          "term": {
+            "_id": "value"
+          }
+        }
+      }
+    }
+  }
+}
+
+vars:pre-request {
+  index: index_name
+}
