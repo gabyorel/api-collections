@@ -1,0 +1,27 @@
+meta {
+  name: GetBackupFolder
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{esUrl}}/_snapshot/{{repository}}
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "repository":{
+      "type":"fs",
+      "settings":{
+        "location": "/repository",
+        "compress": true
+      }
+    }
+  }
+}
+
+vars:pre-request {
+  repository: repository_name
+}

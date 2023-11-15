@@ -1,0 +1,30 @@
+meta {
+  name: CreateBackupFolder
+  type: http
+  seq: 10
+}
+
+put {
+  url: {{esUrl}}/_snapshot/svg
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "type":"fs",
+    "settings":{
+      "location": "/repository",
+      "compress":"true"
+    }
+  }
+}
+
+docs {
+  before creating snapshot :
+  
+  vi /etc/elasticsearch/elasticsearch.yml
+  path.repo: ["/repository"]
+  
+  mkdir /repository
+}

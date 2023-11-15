@@ -1,0 +1,16 @@
+meta {
+  name: GetSnapshot
+  type: http
+  seq: 7
+}
+
+get {
+  url: {{esUrl}}/_snapshot/{{repository}}/{{snapshot}}
+  body: none
+  auth: none
+}
+
+vars:pre-request {
+  repository: repository_name
+  snapshot: snapshot_name
+}

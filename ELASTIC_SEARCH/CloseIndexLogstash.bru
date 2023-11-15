@@ -1,0 +1,19 @@
+meta {
+  name: CloseIndexLogstash
+  type: http
+  seq: 16
+}
+
+post {
+  url: {{esUrl}}/{{logstash}}/_close
+  body: none
+  auth: none
+}
+
+vars:pre-request {
+  logstash: logstash_name
+}
+
+docs {
+  close index logstash before closing request
+}
