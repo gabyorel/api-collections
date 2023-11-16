@@ -40,7 +40,7 @@
         {
           "type": "http",
           "name": "CreateDoc",
-          "seq": 8,
+          "seq": 12,
           "request": {
             "url": "{{esUrl}}/{{index}}/_doc/?pretty",
             "method": "POST",
@@ -86,7 +86,7 @@
         {
           "type": "http",
           "name": "CreateIndex",
-          "seq": 6,
+          "seq": 8,
           "request": {
             "url": "{{esUrl}}/{{index}}",
             "method": "PUT",
@@ -125,7 +125,7 @@
         {
           "type": "http",
           "name": "DeleteBy",
-          "seq": 13,
+          "seq": 19,
           "request": {
             "url": "{{esUrl}}/{{index}}/_delete_by_query?pretty",
             "method": "DELETE",
@@ -171,7 +171,7 @@
         {
           "type": "http",
           "name": "DeleteDoc",
-          "seq": 12,
+          "seq": 18,
           "request": {
             "url": "{{esUrl}}/{{index}}/_doc/{{doc}}",
             "method": "DELETE",
@@ -216,7 +216,7 @@
         {
           "type": "http",
           "name": "DeleteIndex",
-          "seq": 11,
+          "seq": 17,
           "request": {
             "url": "{{esUrl}}/{{index}}",
             "method": "DELETE",
@@ -255,7 +255,7 @@
         {
           "type": "http",
           "name": "DuplicateIndex",
-          "seq": 10,
+          "seq": 14,
           "request": {
             "url": "{{esUrl}}/_reindex?pretty",
             "method": "POST",
@@ -429,7 +429,7 @@
         {
           "type": "http",
           "name": "InsertBulk",
-          "seq": 7,
+          "seq": 9,
           "request": {
             "url": "{{esUrl}}/{{index}}/{{doc}}/_bulk?pretty",
             "method": "PUT",
@@ -533,7 +533,7 @@
         {
           "type": "http",
           "name": "UpdateDoc",
-          "seq": 9,
+          "seq": 13,
           "request": {
             "url": "{{esUrl}}/{{index}}/_update/{{doc}}?pretty",
             "method": "POST",
@@ -580,6 +580,253 @@
                 "enabled": true
               }
             ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "GetBackupFolder",
+          "seq": 6,
+          "request": {
+            "url": "{{esUrl}}/_snapshot/{{repository}}",
+            "method": "GET",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"repository\":{\n    \"type\":\"fs\",\n    \"settings\":{\n      \"location\": \"/repository\",\n      \"compress\": true\n    }\n  }\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {
+              "req": [
+                {
+                  "name": "repository",
+                  "value": "repository_name",
+                  "enabled": true,
+                  "local": false
+                }
+              ]
+            },
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "CreateSnapshot",
+          "seq": 11,
+          "request": {
+            "url": "{{esUrl}}/_snapshot/{{repository}}/{{snapshot}}",
+            "method": "PUT",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "json": "{\n  \"accepted\":true\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {
+              "req": [
+                {
+                  "name": "repository",
+                  "value": "repository_name",
+                  "enabled": true,
+                  "local": false
+                },
+                {
+                  "name": "snapshot",
+                  "value": "snapshot_name",
+                  "enabled": true,
+                  "local": false
+                }
+              ]
+            },
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "CreateBackupFolder",
+          "seq": 10,
+          "request": {
+            "url": "{{esUrl}}/_snapshot/svg",
+            "method": "PUT",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"type\":\"fs\",\n  \"settings\":{\n    \"location\": \"/repository\",\n    \"compress\":\"true\"\n  }\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "GetSnapshot",
+          "seq": 7,
+          "request": {
+            "url": "{{esUrl}}/_snapshot/{{repository}}/{{snapshot}}",
+            "method": "GET",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {
+              "req": [
+                {
+                  "name": "repository",
+                  "value": "repository_name",
+                  "enabled": true,
+                  "local": false
+                },
+                {
+                  "name": "snapshot",
+                  "value": "snapshot_name",
+                  "enabled": true,
+                  "local": false
+                }
+              ]
+            },
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "Restore",
+          "seq": 15,
+          "request": {
+            "url": "{{esUrl}}/_snapshot/{{repository}}/{{snapshot}}/_restore",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"indices\": \"logstash-2017.10.21\",\n  \"ignore_unavailable\": true,\n  \"include_global_state\": true\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {
+              "req": [
+                {
+                  "name": "repository",
+                  "value": "repository_name",
+                  "enabled": true,
+                  "local": false
+                },
+                {
+                  "name": "snapshot",
+                  "value": "snapshot_name",
+                  "enabled": true,
+                  "local": false
+                }
+              ]
+            },
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
+          "name": "CloseIndexLogstash",
+          "seq": 16,
+          "request": {
+            "url": "{{esUrl}}/{{logstash}}/_close",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {
+              "req": [
+                {
+                  "name": "logstash",
+                  "value": "logstash_name",
+                  "enabled": true,
+                  "local": false
+                }
+              ]
+            },
+            "assertions": [],
+            "tests": "",
+            "query": []
           }
         }
       ]
