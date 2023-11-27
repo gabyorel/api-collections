@@ -11,7 +11,7 @@
           "name": "Analyze",
           "seq": 5,
           "request": {
-            "url": "{{esUrl}}/inspections/_analyze",
+            "url": "{{esUrl}}/_analyze",
             "method": "GET",
             "headers": [],
             "body": {
@@ -40,7 +40,7 @@
         {
           "type": "http",
           "name": "CloseIndexLogstash",
-          "seq": 19,
+          "seq": 20,
           "request": {
             "url": "{{esUrl}}/{{logstash}}/_close",
             "method": "POST",
@@ -65,7 +65,7 @@
               "req": [
                 {
                   "name": "logstash",
-                  "value": "logstash_name",
+                  "value": "index_name",
                   "enabled": true,
                   "local": false
                 }
@@ -110,7 +110,7 @@
         {
           "type": "http",
           "name": "CreateDoc",
-          "seq": 15,
+          "seq": 16,
           "request": {
             "url": "{{esUrl}}/{{index}}/_doc/{{doc}}?pretty",
             "method": "POST",
@@ -200,6 +200,46 @@
         },
         {
           "type": "http",
+          "name": "CreateMapping",
+          "seq": 14,
+          "request": {
+            "url": "{{esUrl}}/{{index}}/_mapping",
+            "method": "PUT",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"properties\": {\n    \"title\": {\n      \"type\": \"text\"\n    }\n  }\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {
+              "req": [
+                {
+                  "name": "index",
+                  "value": "index_name",
+                  "enabled": true,
+                  "local": false
+                }
+              ]
+            },
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
           "name": "CreateSnapshot",
           "seq": 12,
           "request": {
@@ -247,7 +287,7 @@
         {
           "type": "http",
           "name": "DeleteBy",
-          "seq": 23,
+          "seq": 24,
           "request": {
             "url": "{{esUrl}}/{{index}}/_delete_by_query?pretty",
             "method": "DELETE",
@@ -293,7 +333,7 @@
         {
           "type": "http",
           "name": "DeleteDoc",
-          "seq": 22,
+          "seq": 23,
           "request": {
             "url": "{{esUrl}}/{{index}}/_doc/{{doc}}",
             "method": "DELETE",
@@ -338,7 +378,7 @@
         {
           "type": "http",
           "name": "DeleteIndex",
-          "seq": 21,
+          "seq": 22,
           "request": {
             "url": "{{esUrl}}/{{index}}",
             "method": "DELETE",
@@ -377,7 +417,7 @@
         {
           "type": "http",
           "name": "DuplicateIndex",
-          "seq": 17,
+          "seq": 18,
           "request": {
             "url": "{{esUrl}}/_reindex?pretty",
             "method": "POST",
@@ -635,8 +675,145 @@
         },
         {
           "type": "http",
+          "name": "InsertBulkMultiIndexes",
+          "seq": 15,
+          "request": {
+            "url": "{{esUrl}}/_bulk?pretty",
+            "method": "POST",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/x-ndjson",
+                "enabled": true
+              }
+            ],
+            "body": {
+              "mode": "json",
+              "json": "{\"index\":{\"_index\":\"library\",\"_id\":\"2\"}}\n{\"title\":\"Star Wars\"}\n{\"index\":{\"_index\":\"library\",\"_id\":\"3\"}}\n{\"title\":\"Star Trek\"}\n",
+              "text": "{ \"index\" : { \"_index\" : \"library\", \"_id\" : \"2\" }}\n{ \"title\" : \"Star Wars\" }",
+              "xml": "\"\n{\"index\":{\"_index\":\"library\",\"_id\":\"2\"}}{\"title\":\"Star Wars\"}{\"index\":{\"_index\":\"library\",\"_id\":\"3\"}}{\"title\":\"Star Trek\"}\n\n\"",
+              "sparql": "\"\n{\"index\":{\"_index\":\"library\",\"_id\":\"2\"}}{\"title\":\"Star Wars\"}{\"index\":{\"_index\":\"library\",\"_id\":\"3\"}}{\"title\":\"Star Trek\"}\n\n\"",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": [
+              {
+                "name": "pretty",
+                "value": "",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "InsertBulkOneIndex",
+          "seq": 10,
+          "request": {
+            "url": "{{esUrl}}/{{index}}/_bulk?pretty",
+            "method": "PUT",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{ \n  \"index\" : { \n    \"_id\" : \"value\" \n  } \n},\n{ \n  \"key\" : \"value\", \n  \"key2\": \"value2\" \n},\n{ \n  \"delete\" : { \n    \"_id\" : \"value\" \n  } \n},\n{ \n  \"update\" : { \n    \"_id\" : \"value\" \n  }\n},\n{ \n  \"doc\" : { \n    \"key\": \"value\" \n  } \n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {
+              "req": [
+                {
+                  "name": "index",
+                  "value": "index_name",
+                  "enabled": true,
+                  "local": false
+                },
+                {
+                  "name": "doc",
+                  "value": "doc_name",
+                  "enabled": true,
+                  "local": false
+                }
+              ]
+            },
+            "assertions": [],
+            "tests": "",
+            "query": [
+              {
+                "name": "pretty",
+                "value": "",
+                "enabled": true
+              }
+            ]
+          }
+        },
+        {
+          "type": "http",
+          "name": "OpenIndexLogstash",
+          "seq": 21,
+          "request": {
+            "url": "{{esUrl}}/{{logstash}}/_open",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {
+              "req": [
+                {
+                  "name": "logstash",
+                  "value": "index_name",
+                  "enabled": true,
+                  "local": false
+                }
+              ]
+            },
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
           "name": "Restore",
-          "seq": 18,
+          "seq": 19,
           "request": {
             "url": "{{esUrl}}/_snapshot/{{repository}}/{{snapshot}}/_restore",
             "method": "POST",
@@ -733,8 +910,39 @@
         },
         {
           "type": "http",
+          "name": "SQLSearch",
+          "seq": 4,
+          "request": {
+            "url": "{{esUrl}}/_sql",
+            "method": "GET",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  \"query\":\"SELECT * FROM table\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {},
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
+        },
+        {
+          "type": "http",
           "name": "UpdateDoc",
-          "seq": 16,
+          "seq": 17,
           "request": {
             "url": "{{esUrl}}/{{index}}/_update/{{doc}}?pretty",
             "method": "POST",
@@ -822,179 +1030,11 @@
             "tests": "",
             "query": []
           }
-        },
-        {
-          "type": "http",
-          "name": "OpenIndexLogstash",
-          "seq": 20,
-          "request": {
-            "url": "{{esUrl}}/{{logstash}}/_open",
-            "method": "POST",
-            "headers": [],
-            "body": {
-              "mode": "none",
-              "formUrlEncoded": [],
-              "multipartForm": []
-            },
-            "auth": {
-              "mode": "none",
-              "basic": {
-                "username": "",
-                "password": ""
-              },
-              "bearer": {
-                "token": ""
-              }
-            },
-            "script": {},
-            "vars": {
-              "req": [
-                {
-                  "name": "logstash",
-                  "value": "index_name",
-                  "enabled": true,
-                  "local": false
-                }
-              ]
-            },
-            "assertions": [],
-            "tests": "",
-            "query": []
-          }
-        },
-        {
-          "type": "http",
-          "name": "InsertBulkOneIndex",
-          "seq": 10,
-          "request": {
-            "url": "{{esUrl}}/{{index}}/_bulk?pretty",
-            "method": "PUT",
-            "headers": [],
-            "body": {
-              "mode": "json",
-              "json": "{ \n  \"index\" : { \n    \"_id\" : \"value\" \n  } \n},\n{ \n  \"key\" : \"value\", \n  \"key2\": \"value2\" \n},\n{ \n  \"delete\" : { \n    \"_id\" : \"value\" \n  } \n},\n{ \n  \"update\" : { \n    \"_id\" : \"value\" \n  }\n},\n{ \n  \"doc\" : { \n    \"key\": \"value\" \n  } \n}",
-              "formUrlEncoded": [],
-              "multipartForm": []
-            },
-            "auth": {
-              "mode": "none",
-              "basic": {
-                "username": "",
-                "password": ""
-              },
-              "bearer": {
-                "token": ""
-              }
-            },
-            "script": {},
-            "vars": {
-              "req": [
-                {
-                  "name": "index",
-                  "value": "index_name",
-                  "enabled": true,
-                  "local": false
-                },
-                {
-                  "name": "doc",
-                  "value": "doc_name",
-                  "enabled": true,
-                  "local": false
-                }
-              ]
-            },
-            "assertions": [],
-            "tests": "",
-            "query": [
-              {
-                "name": "pretty",
-                "value": "",
-                "enabled": true
-              }
-            ]
-          }
-        },
-        {
-          "type": "http",
-          "name": "InsertBulkMultiIndexes",
-          "seq": 14,
-          "request": {
-            "url": "{{esUrl}}/_bulk?pretty",
-            "method": "POST",
-            "headers": [
-              {
-                "name": "Content-Type",
-                "value": "application/x-ndjson",
-                "enabled": true
-              }
-            ],
-            "body": {
-              "mode": "json",
-              "json": "{\"index\":{\"_index\":\"library\",\"_id\":\"2\"}}\n{\"title\":\"Star Wars\"}\n{\"index\":{\"_index\":\"library\",\"_id\":\"3\"}}\n{\"title\":\"Star Trek\"}\n",
-              "text": "{ \"index\" : { \"_index\" : \"library\", \"_id\" : \"2\" }}\n{ \"title\" : \"Star Wars\" }",
-              "xml": "\"\n{\"index\":{\"_index\":\"library\",\"_id\":\"2\"}}{\"title\":\"Star Wars\"}{\"index\":{\"_index\":\"library\",\"_id\":\"3\"}}{\"title\":\"Star Trek\"}\n\n\"",
-              "sparql": "\"\n{\"index\":{\"_index\":\"library\",\"_id\":\"2\"}}{\"title\":\"Star Wars\"}{\"index\":{\"_index\":\"library\",\"_id\":\"3\"}}{\"title\":\"Star Trek\"}\n\n\"",
-              "formUrlEncoded": [],
-              "multipartForm": []
-            },
-            "auth": {
-              "mode": "none",
-              "basic": {
-                "username": "",
-                "password": ""
-              },
-              "bearer": {
-                "token": ""
-              }
-            },
-            "script": {},
-            "vars": {},
-            "assertions": [],
-            "tests": "",
-            "query": [
-              {
-                "name": "pretty",
-                "value": "",
-                "enabled": true
-              }
-            ]
-          }
-        },
-        {
-          "type": "http",
-          "name": "SQLSearch",
-          "seq": 4,
-          "request": {
-            "url": "{{esUrl}}/_sql",
-            "method": "GET",
-            "headers": [],
-            "body": {
-              "mode": "json",
-              "json": "{\n  \"query\":\"SELECT * FROM table\"\n}",
-              "formUrlEncoded": [],
-              "multipartForm": []
-            },
-            "auth": {
-              "mode": "none",
-              "basic": {
-                "username": "",
-                "password": ""
-              },
-              "bearer": {
-                "token": ""
-              }
-            },
-            "script": {},
-            "vars": {},
-            "assertions": [],
-            "tests": "",
-            "query": []
-          }
         }
       ]
     }
   ],
-  "activeEnvironmentUid": "0v9S0EuFBzeWL5b5akYuC",
+  "activeEnvironmentUid": "1YoEEW2tS3yMLWXXIEelm",
   "environments": [
     {
       "variables": [
