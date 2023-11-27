@@ -1,0 +1,23 @@
+meta {
+  name: UpdateSettings
+  type: http
+  seq: 13
+}
+
+put {
+  url: {{esUrl}}/{{index}}/_settings
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "index": {
+      "number_of_replicas": 2
+    }
+  }
+}
+
+vars:pre-request {
+  index: index_name
+}

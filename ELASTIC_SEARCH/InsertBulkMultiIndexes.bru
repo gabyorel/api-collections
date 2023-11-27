@@ -1,0 +1,46 @@
+meta {
+  name: InsertBulkMultiIndexes
+  type: http
+  seq: 14
+}
+
+post {
+  url: {{esUrl}}/_bulk?pretty
+  body: json
+  auth: none
+}
+
+query {
+  pretty: 
+}
+
+headers {
+  Content-Type: application/x-ndjson
+}
+
+body:json {
+  {"index":{"_index":"library","_id":"2"}}
+  {"title":"Star Wars"}
+  {"index":{"_index":"library","_id":"3"}}
+  {"title":"Star Trek"}
+  
+}
+
+body:text {
+  { "index" : { "_index" : "library", "_id" : "2" }}
+  { "title" : "Star Wars" }
+}
+
+body:xml {
+  "
+  {"index":{"_index":"library","_id":"2"}}{"title":"Star Wars"}{"index":{"_index":"library","_id":"3"}}{"title":"Star Trek"}
+  
+  "
+}
+
+body:sparql {
+  "
+  {"index":{"_index":"library","_id":"2"}}{"title":"Star Wars"}{"index":{"_index":"library","_id":"3"}}{"title":"Star Trek"}
+  
+  "
+}

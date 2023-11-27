@@ -1,5 +1,9 @@
 {
   "version": "1",
   "name": "API_COLLECTIONS",
-  "type": "collection"
+  "type": "collection",
+  "clientCertificates": {
+    "enabled": true,
+    "certs": []
+  }
 }

@@ -1,0 +1,21 @@
+meta {
+  name: SQLSearch
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{esUrl}}/_sql
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "query":"SELECT * FROM table"
+  }
+}
+
+docs {
+  Search in index/doc
+}

@@ -1,11 +1,11 @@
 meta {
   name: CreateDoc
   type: http
-  seq: 12
+  seq: 15
 }
 
 post {
-  url: {{esUrl}}/{{index}}/_doc/?pretty
+  url: {{esUrl}}/{{index}}/_doc/{{doc}}?pretty
   body: json
   auth: none
 }
@@ -22,4 +22,5 @@ body:json {
 
 vars:pre-request {
   index: index_name
+  doc: doc_name
 }

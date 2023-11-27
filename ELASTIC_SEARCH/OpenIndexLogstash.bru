@@ -1,17 +1,17 @@
 meta {
-  name: CloseIndexLogstash
+  name: OpenIndexLogstash
   type: http
-  seq: 19
+  seq: 20
 }
 
 post {
-  url: {{esUrl}}/{{logstash}}/_close
+  url: {{esUrl}}/{{logstash}}/_open
   body: none
   auth: none
 }
 
 vars:pre-request {
-  logstash: logstash_name
+  logstash: index_name
 }
 
 docs {

@@ -1,0 +1,47 @@
+meta {
+  name: InsertBulkOneIndex
+  type: http
+  seq: 10
+}
+
+put {
+  url: {{esUrl}}/{{index}}/_bulk?pretty
+  body: json
+  auth: none
+}
+
+query {
+  pretty: 
+}
+
+body:json {
+  { 
+    "index" : { 
+      "_id" : "value" 
+    } 
+  },
+  { 
+    "key" : "value", 
+    "key2": "value2" 
+  },
+  { 
+    "delete" : { 
+      "_id" : "value" 
+    } 
+  },
+  { 
+    "update" : { 
+      "_id" : "value" 
+    }
+  },
+  { 
+    "doc" : { 
+      "key": "value" 
+    } 
+  }
+}
+
+vars:pre-request {
+  index: index_name
+  doc: doc_name
+}
