@@ -1,0 +1,25 @@
+meta {
+  name: CreateMapping
+  type: http
+  seq: 14
+}
+
+put {
+  url: {{esUrl}}/{{index}}/_mapping
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "properties": {
+      "title": {
+        "type": "text"
+      }
+    }
+  }
+}
+
+vars:pre-request {
+  index: index_name
+}
