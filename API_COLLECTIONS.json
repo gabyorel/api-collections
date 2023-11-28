@@ -287,7 +287,7 @@
         {
           "type": "http",
           "name": "DeleteBy",
-          "seq": 24,
+          "seq": 25,
           "request": {
             "url": "{{esUrl}}/{{index}}/_delete_by_query?pretty",
             "method": "DELETE",
@@ -333,7 +333,7 @@
         {
           "type": "http",
           "name": "DeleteDoc",
-          "seq": 23,
+          "seq": 24,
           "request": {
             "url": "{{esUrl}}/{{index}}/_doc/{{doc}}",
             "method": "DELETE",
@@ -378,7 +378,7 @@
         {
           "type": "http",
           "name": "DeleteIndex",
-          "seq": 22,
+          "seq": 23,
           "request": {
             "url": "{{esUrl}}/{{index}}",
             "method": "DELETE",
@@ -861,12 +861,12 @@
           "name": "Search",
           "seq": 3,
           "request": {
-            "url": "{{esUrl}}/{{index}}/{{doc}}/_search?pretty",
+            "url": "{{esUrl}}/{{index}}/_search?pretty",
             "method": "GET",
             "headers": [],
             "body": {
               "mode": "json",
-              "json": "{\n  \"query\":{\n    \"bool\":{\n      \"must\":{\n        \"range\":{\n          \"Date_Log\":{\n            \"gt\":\"2021-10-19T20:00:00\",\n            \"lt\":\"2021-10-19T23:50:50\"\n          }\n        }\n      }\n    }\n  }\n}",
+              "json": "{\n  \"size\": 10,\n  \"from\":5,\n  \"query\": {\n    \"match\": {\n      \"key\":\"value\"\n    }\n  }\n}",
               "formUrlEncoded": [],
               "multipartForm": []
             },
@@ -1030,11 +1030,56 @@
             "tests": "",
             "query": []
           }
+        },
+        {
+          "type": "http",
+          "name": "CreatePIT",
+          "seq": 22,
+          "request": {
+            "url": "{{esUrl}}/{{index}}/_pit?keep-alive=5m",
+            "method": "POST",
+            "headers": [],
+            "body": {
+              "mode": "none",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {
+              "req": [
+                {
+                  "name": "index",
+                  "value": "index_name",
+                  "enabled": true,
+                  "local": false
+                }
+              ]
+            },
+            "assertions": [],
+            "tests": "",
+            "query": [
+              {
+                "name": "keep-alive",
+                "value": "5m",
+                "enabled": true
+              }
+            ]
+          }
         }
       ]
     }
   ],
-  "activeEnvironmentUid": "1YoEEW2tS3yMLWXXIEelm",
+  "activeEnvironmentUid": "453dAZTa5isNYYgIiSAmK",
   "environments": [
     {
       "variables": [
