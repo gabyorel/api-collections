@@ -5,7 +5,7 @@ meta {
 }
 
 get {
-  url: {{esUrl}}/{{index}}/{{doc}}/_search?pretty
+  url: {{esUrl}}/{{index}}/_search?pretty
   body: json
   auth: none
 }
@@ -16,16 +16,11 @@ query {
 
 body:json {
   {
-    "query":{
-      "bool":{
-        "must":{
-          "range":{
-            "Date_Log":{
-              "gt":"2021-10-19T20:00:00",
-              "lt":"2021-10-19T23:50:50"
-            }
-          }
-        }
+    "size": 10,
+    "from":5,
+    "query": {
+      "match": {
+        "key":"value"
       }
     }
   }
@@ -38,4 +33,27 @@ vars:pre-request {
 
 docs {
   Search in index/doc
+  
+  example :
+  {
+    "size": 10,
+    "from":5,
+    "query": {
+      "match": {
+        "author.fullname": "Martin"
+      }
+    },
+    "sort": [
+      {
+        "title.keyword": {
+          "order": "asc"
+        }
+      }
+    ],
+    "_source": [
+      "isbn",
+      "title",
+      "author.fullname"
+    ]
+  }
 }

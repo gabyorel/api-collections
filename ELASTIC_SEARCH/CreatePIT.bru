@@ -1,0 +1,19 @@
+meta {
+  name: CreatePIT
+  type: http
+  seq: 22
+}
+
+post {
+  url: {{esUrl}}/{{index}}/_pit?keep-alive=5m
+  body: none
+  auth: none
+}
+
+query {
+  keep-alive: 5m
+}
+
+vars:pre-request {
+  index: index_name
+}
