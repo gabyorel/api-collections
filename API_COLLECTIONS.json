@@ -1075,6 +1075,46 @@
               }
             ]
           }
+        },
+        {
+          "type": "http",
+          "name": "DeletePit",
+          "seq": 26,
+          "request": {
+            "url": "{{esUrl}}/{{index}}/_pit",
+            "method": "DELETE",
+            "headers": [],
+            "body": {
+              "mode": "json",
+              "json": "{\n  'id' : \"value\"\n}",
+              "formUrlEncoded": [],
+              "multipartForm": []
+            },
+            "auth": {
+              "mode": "none",
+              "basic": {
+                "username": "",
+                "password": ""
+              },
+              "bearer": {
+                "token": ""
+              }
+            },
+            "script": {},
+            "vars": {
+              "req": [
+                {
+                  "name": "index",
+                  "value": "index_name",
+                  "enabled": true,
+                  "local": false
+                }
+              ]
+            },
+            "assertions": [],
+            "tests": "",
+            "query": []
+          }
         }
       ]
     }
