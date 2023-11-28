@@ -1,0 +1,21 @@
+meta {
+  name: DeletePit
+  type: http
+  seq: 26
+}
+
+delete {
+  url: {{esUrl}}/{{index}}/_pit
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    'id' : "value"
+  }
+}
+
+vars:pre-request {
+  index: index_name
+}
