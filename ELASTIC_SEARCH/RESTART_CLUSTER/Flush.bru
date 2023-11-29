@@ -1,0 +1,11 @@
+meta {
+  name: Flush
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{esUrl}}/_flush/synced
+  body: none
+  auth: none
+}

@@ -1,0 +1,19 @@
+meta {
+  name: DeactivateReplicasShardAllocation
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{esUrl}}/_cluster/settings
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "persistent": {
+      "cluster.routing.allocation.enable": "primaries"
+    }
+  }
+}

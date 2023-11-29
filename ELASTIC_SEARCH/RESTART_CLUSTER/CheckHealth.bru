@@ -1,0 +1,15 @@
+meta {
+  name: CheckHealth
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{esUrl}}/health/{{cluster}}
+  body: none
+  auth: none
+}
+
+vars:pre-request {
+  cluster: cluster_name
+}

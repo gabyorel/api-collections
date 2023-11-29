@@ -1,7 +1,7 @@
 meta {
-  name: Search
+  name: Aggregate
   type: http
-  seq: 3
+  seq: 9
 }
 
 get {
@@ -16,28 +16,19 @@ query {
 
 body:json {
   {
-    "size":20,
-    "query": {
-      "match":{
-        "category":"jeunesse"
-      },
-      "range" : {
-        "releaseDate":{
-          "lte":"2022-11-28"
+    "size": 0,
+    "aggs": {
+      "avg_price": {
+        "avg": {
+          "field": "price"
         }
       }
-    },
-    "sort":[
-      {
-        "price":"dsc"
-      }
-    ]
+    }
   }
 }
 
 vars:pre-request {
   index: library
-  ~doc: doc_name
 }
 
 docs {
