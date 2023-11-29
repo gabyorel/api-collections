@@ -1,0 +1,19 @@
+meta {
+  name: ShowPolicy
+  type: http
+  seq: 7
+}
+
+get {
+  url: {{esUrl}}/_slm/policy/{{policy}}?human
+  body: none
+  auth: none
+}
+
+query {
+  human: 
+}
+
+docs {
+  {{esUrl}}/_slm/stats
+}

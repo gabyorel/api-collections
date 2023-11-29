@@ -1,0 +1,19 @@
+meta {
+  name: ExecutePolicy
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{esUrl}}/_slm/policy/{{policy}}/_execute
+  body: none
+  auth: none
+}
+
+vars:pre-request {
+  policy: policy_name
+}
+
+docs {
+  close index logstash before with CloseIndexLogstash
+}
