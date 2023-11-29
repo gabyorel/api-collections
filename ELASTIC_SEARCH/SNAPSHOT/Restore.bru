@@ -1,20 +1,24 @@
 meta {
   name: Restore
   type: http
-  seq: 18
+  seq: 4
 }
 
 post {
-  url: {{esUrl}}/_snapshot/{{repository}}/{{snapshot}}/_restore
+  url: {{esUrl}}/_snapshot/{{repository}}/{{snapshot}}/_restore?wait_for_completion=true
   body: json
   auth: none
+}
+
+query {
+  wait_for_completion: true
 }
 
 body:json {
   {
     "indices": "logstash-2017.10.21",
     "ignore_unavailable": true,
-    "include_global_state": true
+    "include_global_state": false
   }
 }
 
