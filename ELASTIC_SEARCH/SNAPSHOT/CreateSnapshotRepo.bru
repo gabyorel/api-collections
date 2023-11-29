@@ -1,0 +1,34 @@
+meta {
+  name: CreateSnapshotRepo
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{esUrl}}/_snapshot/{{repository}}
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "type": "fs",
+    "settings": {
+      "compress": true,
+      "location": "location_path"
+    }
+  }
+}
+
+vars:pre-request {
+  repository: repository_name
+}
+
+docs {
+  before creating snapshot :
+  
+  vi /etc/elasticsearch/elasticsearch.yml
+  path.repo: ["/repository"]
+  
+  mkdir /repository
+}

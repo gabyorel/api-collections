@@ -1,7 +1,7 @@
 meta {
   name: GetSnapshot
   type: http
-  seq: 8
+  seq: 3
 }
 
 get {
@@ -13,4 +13,8 @@ get {
 vars:pre-request {
   repository: repository_name
   snapshot: snapshot_name
+}
+
+docs {
+  {{esUrl}}/_snapshot/{{repository}}/{{snapshot}}/_status
 }
