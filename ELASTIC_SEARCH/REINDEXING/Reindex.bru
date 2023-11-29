@@ -1,0 +1,22 @@
+meta {
+  name: Reindex
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{esUrl}}/_reindex
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "source" : {
+      "index" : "index_name"
+    },
+    "dest" : {
+      "index" : "index_name"
+    }
+  }
+}

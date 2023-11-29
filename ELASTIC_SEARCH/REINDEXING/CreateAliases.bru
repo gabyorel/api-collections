@@ -1,0 +1,30 @@
+meta {
+  name: CreateAliases
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{esUrl}}/_aliases
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "actions": [
+      {
+        "add": {
+          "index": "index_name",
+          "alias": "alias_name"
+        }
+      },
+      {
+        "delete": {
+          "index": "index_name",
+          "alias": "alias_name"
+        }
+      }
+    ]
+  }
+}
